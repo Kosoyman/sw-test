@@ -1,8 +1,6 @@
 self.addEventListener('install', function (event) {
-  console.log('first step')
   event.waitUntil(
     caches.open('v1').then(function (cache) {
-      console.log('opened cache')
       return cache.addAll([
         'index.html',
         'style.css',
@@ -13,12 +11,11 @@ self.addEventListener('install', function (event) {
         'gallery/myLittleVader.jpg',
         'gallery/snowTroopers.jpg'
       ])
-    }).then(console.log('done with cache'))
+    })
   )
 })
 
 self.addEventListener('fetch', function (event) {
-  console.log('started fetch')
   event.respondWith(caches.match(event.request).then(function (response) {
     // caches.match() always resolves
     // but in case of success response will have value

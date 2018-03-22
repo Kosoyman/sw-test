@@ -1,0 +1,22 @@
+{
+  "name": "sw-test",
+  "version": "1.0.0",
+  "description": "Service Worker test repository. This is a very simple demo to show basic service worker features in action. The demo can be seen on [our GitHub pages](https://mdn.github.io/sw-test/).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kosoyman/sw-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kosoyman/sw-test/issues"
+  },
+  "homepage": "https://github.com/Kosoyman/sw-test#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

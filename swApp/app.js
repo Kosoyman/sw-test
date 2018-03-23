@@ -1,5 +1,4 @@
 // register service worker
-
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(function (reg) {
     if (reg.installing) {
@@ -64,6 +63,7 @@ const pushButton = document.querySelector('#subscription')
 
 let isSubscribed = false
 let swRegistration = null
+let endpoint
 
 function urlB64ToUint8Array (base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4)
@@ -99,9 +99,18 @@ function updateBtn () {
 
 function updateSubscriptionOnServer (subscription) {
   // TODO: Send subscription to application server
-
   if (subscription) {
     console.log(JSON.stringify(subscription))
+    endpoint = subscription.endpoint
+    fetch('./register', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        endpoint: subscription.endpoint
+      })
+    })
   }
 }
 
@@ -171,4 +180,35 @@ function initializeUI () {
 
     updateBtn()
   })
+}
+
+// navigator.serviceWorker.register('service-worker.js')
+// .then(function (registration) {
+//   return registration.pushManager.getSubscription()
+//   .then(function (subscription) {
+//     if (subscription) {
+//       return subscription
+//     }
+
+//     return registration.pushManager.subscribe({ userVisibleOnly: true })
+//   })
+// }).then(function (subscription) {
+//   endpoint = subscription.endpoint
+//   fetch('./register', {
+//     method: 'post',
+//     headers: {
+//       'Content-type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       endpoint: subscription.endpoint
+//     })
+//   })
+// })
+
+document.getElementById('doIt').onclick = function () {
+  fetch('./sendNotification?endpoint=' + endpoint,
+    {
+      method: 'post'
+    }
+  )
 }

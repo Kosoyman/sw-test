@@ -1,3 +1,4 @@
+// console.log(navigator.serviceWorker.getRegistration())
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open('v1').then(function (cache) {
@@ -5,7 +6,6 @@ self.addEventListener('install', function (event) {
         'index.html',
         'style.css',
         'app.js',
-        'sw.js',
         'image-list.js',
         'star-wars-logo.jpg',
         'gallery/bountyHunters.jpg',
@@ -20,7 +20,10 @@ self.addEventListener('fetch', function (event) {
   console.log(event.request.url)
   event.respondWith(
   caches.match(event.request).then(function (response) {
+    console.log(response)
     return response || fetch(event.request)
+  }).catch(function (error) {
+    console.log(error)
   })
   )
 })
@@ -55,15 +58,12 @@ self.addEventListener('push', function (event) {
     icon: 'images/icon.png',
     badge: 'images/badge.png'
   }
-
   event.waitUntil(self.registration.showNotification(title, options))
 })
 
 self.addEventListener('notificationclick', function (event) {
   console.log('[Service Worker] Notification click Received.')
-
   event.notification.close()
-
   event.waitUntil(
     clients.openWindow('https://developers.google.com/web/')
   )

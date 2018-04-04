@@ -101,16 +101,16 @@ function updateSubscriptionOnServer (subscription) {
   // TODO: Send subscription to application server
   if (subscription) {
     console.log(JSON.stringify(subscription))
-    endpoint = subscription.endpoint
-    fetch('./register', {
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        endpoint: subscription.endpoint
-      })
-    })
+    // endpoint = subscription.endpoint
+    // fetch('./register', {
+    //   method: 'post',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     endpoint: subscription.endpoint
+    //   })
+    // })
   }
 }
 
@@ -205,10 +205,10 @@ function initializeUI () {
 //   })
 // })
 
-document.getElementById('doIt').onclick = function () {
-  fetch('./sendNotification?endpoint=' + endpoint,
-    {
-      method: 'post'
-    }
-  )
-}
+// document.getElementById('doIt').onclick = function () {
+//   fetch('./sendNotification?endpoint=' + endpoint,
+//     {
+//       method: 'post'
+//     }
+//   )
+// }

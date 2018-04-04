@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "http-server": "^0.11.1",
+    "push.js": "^1.0.5",
     "web-push": "^3.3.0"
   },
   "devDependencies": {},

@@ -17,10 +17,10 @@ self.addEventListener('install', function (event) {
 })
 
 self.addEventListener('fetch', function (event) {
-  console.log(event.request.url)
+  // console.log(event.request.url)
   event.respondWith(
   caches.match(event.request).then(function (response) {
-    console.log(response)
+    // console.log(response)
     return response || fetch(event.request)
   }).catch(function (error) {
     console.log(error)
@@ -51,15 +51,37 @@ self.addEventListener('push', function (event) {
   console.log('[Service Worker] Push Received.')
   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
   let text = `${event.data.text()}`
-  console.log(text)
   const title = 'Push Codelab'
   const options = {
     body: text,
-    icon: 'images/icon.png',
-    badge: 'images/badge.png'
+    icon: 'star-wars-logo.jpg',
+    badge: 'images/badge.png',
+    actions: [
+      { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
+      { "action": "no", "title": "No", "icon": "images/no.png" }
+    ]
   }
   event.waitUntil(self.registration.showNotification(title, options))
 })
+
+// self.addEventListener('push', function (event) {
+//   console.log('[Service Worker] Push Received.')
+//   console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
+//   let text = `${event.data.text()}`
+//   let video = 'https://f978740a.ngrok.io/video.mp4'
+//   const title = 'Push Codelab'
+//   const options = {
+//     body: text,
+//     icon: 'star-wars-logo.jpg',
+//     badge: 'images/badge.png',
+//     actions: [
+//       { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
+//       { "action": "no", "title": "No", "icon": "images/no.png" }
+//     ]
+//   }
+//   event.waitUntil(clients.openWindow('https://f978740a.ngrok.io/gallery/bountyHunters.jpg')
+// )
+// })
 
 self.addEventListener('notificationclick', function (event) {
   console.log('[Service Worker] Notification click Received.')

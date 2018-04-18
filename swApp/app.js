@@ -18,7 +18,6 @@ if ('serviceWorker' in navigator) {
 }
 
 // function for loading each image via fetch
-
 function imgLoad (imgJSON) {
   // return a promise for an image loading
   return fetch(imgJSON.url)
@@ -43,8 +42,9 @@ window.onload = function () {
       var myFigure = document.createElement('figure')
       var myCaption = document.createElement('caption')
       var imageURL = window.URL.createObjectURL(arrayResponse[0])
-
+      console.log(imageURL)
       myImage.src = imageURL
+      console.log(myImage)
       myImage.setAttribute('alt', arrayResponse[1].alt)
       myCaption.innerHTML = '<strong>' + arrayResponse[1].name + '</strong>: Taken by ' + arrayResponse[1].credit
 
@@ -205,10 +205,17 @@ function initializeUI () {
 //   })
 // })
 
-// document.getElementById('doIt').onclick = function () {
-//   fetch('./sendNotification?endpoint=' + endpoint,
-//     {
-//       method: 'post'
-//     }
-//   )
-// }
+document.getElementById('doIt').onclick = function () {
+  for (let i = 0; i < 1000; i++) {
+    Push.create('Hello world!', {
+      body: "How's it hangin'?",
+      icon: 'star-wars-logo.jpg',
+      timeout: 100,
+      onClick: function () {
+        window.focus()
+        this.close()
+      }
+    })
+    console.log(i)
+  }
+}

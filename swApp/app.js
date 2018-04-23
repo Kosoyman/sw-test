@@ -1,6 +1,7 @@
 // register service worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function (reg) {
+  navigator.serviceWorker.register('OneSignalSDKWorker.js').then(function (reg) { //navigator.serviceWorker.register('/OneSignalSDKWorker.js');
+
     if (reg.installing) {
       console.log('Service worker installing')
     } else if (reg.waiting) {
@@ -42,9 +43,9 @@ window.onload = function () {
       var myFigure = document.createElement('figure')
       var myCaption = document.createElement('caption')
       var imageURL = window.URL.createObjectURL(arrayResponse[0])
-      console.log(imageURL)
+      //console.log(imageURL)
       myImage.src = imageURL
-      console.log(myImage)
+      //console.log(myImage)
       myImage.setAttribute('alt', arrayResponse[1].alt)
       myCaption.innerHTML = '<strong>' + arrayResponse[1].name + '</strong>: Taken by ' + arrayResponse[1].credit
 
@@ -205,17 +206,3 @@ function initializeUI () {
 //   })
 // })
 
-document.getElementById('doIt').onclick = function () {
-  for (let i = 0; i < 1000; i++) {
-    Push.create('Hello world!', {
-      body: "How's it hangin'?",
-      icon: 'star-wars-logo.jpg',
-      timeout: 100,
-      onClick: function () {
-        window.focus()
-        this.close()
-      }
-    })
-    console.log(i)
-  }
-}
